@@ -22,7 +22,7 @@ Forwarding https://7853-213-152-241-52.ngrok-free.app -> http://localhost:3000
 ## Paths
 
 start auth flow
-https://7853-213-152-241-52.ngrok-free.app/promptOuraAuth
+https://7853-213-152-241-52.ngrok-free.app/promptOuraAuth?userAddress=0x2389r082389239
 
 1 week of oura readiness (must have authorized)
 https://7853-213-152-241-52.ngrok-free.app/getReadinessData/2024-03-08/2024-03-15
