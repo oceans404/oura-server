@@ -18,3 +18,11 @@ use ngrok server forwarding
 ```bash
 Forwarding https://7853-213-152-241-52.ngrok-free.app -> http://localhost:3000
 ```
+
+## Paths
+
+start auth flow
+https://7853-213-152-241-52.ngrok-free.app/promptOuraAuth
+
+1 week of oura readiness (must have authorized)
+https://7853-213-152-241-52.ngrok-free.app/getReadinessData/2024-03-08/2024-03-15

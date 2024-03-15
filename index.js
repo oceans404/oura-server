@@ -41,7 +41,7 @@ app.get('/', (req, res) => {
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
-  console.log(`oura callback url: ${ouraConfig.ouraCallbackUrl}`);
+  console.log(`oura callback url: ${ouraConfig.redirectUri}`);
 });
 
 // prompt to begin oura authorization flow
