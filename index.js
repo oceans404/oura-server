@@ -54,7 +54,10 @@ app.get(url.parse(promptOuraAuthAddress).pathname, (req, res) => {
   const state = req.query.userAddress || '69';
   const authUri = authClient.code.getUri({ state });
   // res.send('<a href="' + authUri + '">Authorize</a>');
-  return res.status(200).set('Content-Type', 'application/json').send(authUri);
+  return res
+    .status(200)
+    .set('Content-Type', 'application/json')
+    .send({ authUri });
 });
 
 // auth redirect from oura api
