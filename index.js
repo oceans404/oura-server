@@ -2,7 +2,6 @@ const express = require('express');
 const oura = require('oura');
 const moment = require('moment');
 const url = require('url');
-const { Server } = require('socket.io');
 const cors = require('cors');
 
 require('dotenv').config();
@@ -23,6 +22,7 @@ let endNow = moment().format(dateFormat);
 
 const redirect = url.parse(ouraConfig.redirectUri);
 const app = express();
+app.use(cors());
 
 const port = process.env.PORT || 8000;
 const host = redirect.host;
@@ -42,12 +42,6 @@ const server = app.listen(port, () => {
   console.log(
     `oura callback url to make sure is on the allowlist: ${ouraConfig.redirectUri}`
   );
-});
-
-const io = new Server(server, {
-  cors: {
-    origin: process.env.WEB_APP_URL,
-  },
 });
 
 // save auth qr requests
