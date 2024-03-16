@@ -52,8 +52,7 @@ const authClient = oura.Auth(ouraConfig);
 // prompt to begin oura authorization flow
 app.get(url.parse(promptOuraAuthAddress).pathname, (req, res) => {
   const state = req.query.userAddress || '69';
-  const authUri = authClient.code.getUri({ state });
-  // res.send('<a href="' + authUri + '">Authorize</a>');
+  const authUri = authClient.token.getUri({ state });
   return res
     .status(200)
     .set('Content-Type', 'application/json')
@@ -66,20 +65,16 @@ app.get(redirect.pathname, (req, res) => {
   console.log(userAddress);
   return authClient.code
     .getToken(req.originalUrl)
-    .then(function (auth) {
+    .then((auth) => {
       return auth.refresh().then(function (refreshed) {
         const authConfig = refreshed.data;
         // store user authConfig
         authRequests.set(userAddress, authConfig);
-
-        // debug logging for addresses and requests
-        console.log(`set auth request for ${userAddress}`);
-        console.log(authRequests.get(userAddress));
       });
     })
     .then(function () {
       res.send(
-        'Loged into oura. Get <a href="' +
+        'Logged into oura. Get <a href="' +
           `${oneWeekReadinessDataPath}?state=${userAddress}` +
           '">last week\'s readiness data</a>'
       );
@@ -92,12 +87,16 @@ app.get(redirect.pathname, (req, res) => {
 // get readiness from any start to end dates
 app.get('/getReadinessData/:start/:end', (req, res) => {
   const state = req.query.state;
-  const token = authRequests.get(state).access_token;
+  const token = req.query.access_token;
   const client = new oura.Client(token);
   client
     .dailyReadiness(req.params.start, req.params.end)
     .then(function (user) {
-      res.json(JSON.stringify(user, null, 1));
+      // res.json(JSON.stringify(user, null, 1));
+      return res
+        .status(200)
+        .set('Content-Type', 'application/json')
+        .send(JSON.stringify(user, null, 1));
     })
     .catch(function (error) {
       console.error(error);
