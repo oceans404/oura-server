@@ -16,15 +16,17 @@ cp .env.sample .env
 use ngrok server forwarding
 
 ```bash
-Forwarding https://7853-213-152-241-52.ngrok-free.app -> http://localhost:3000
+Forwarding https://bb7a-213-152-241-52.ngrok-free.app -> http://localhost:3000
 ```
 
 ## Paths
 
-start auth flow
-ngrok: https://7853-213-152-241-52.ngrok-free.app/promptOuraAuth?userAddress=0x2389r082389239
+start auth flow with a dummy address
+localhost: http://localhost:8000/promptOuraAuth?userAddress=0x2389r082389239
+ngrok: https://{your-custom-ngrok}.ngrok-free.app/promptOuraAuth?userAddress=0x2389r082389239
 prod: https://gm-ready.onrender.com/promptOuraAuth?userAddress=0x2389r082389239
 
 1 week of oura readiness (must have authorized)
-ngrok: https://7853-213-152-241-52.ngrok-free.app/getReadinessData/2024-03-08/2024-03-15
+localhost:
+ngrok: https://{your-custom-ngrok}.ngrok-free.app/getReadinessData/2024-03-08/2024-03-15
 prod: https://gm-ready.onrender.com/getReadinessData/2024-03-08/2024-03-15
